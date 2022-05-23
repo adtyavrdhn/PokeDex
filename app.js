@@ -28,7 +28,7 @@ const query = util.promisify(connection.query).bind(connection);
 
 (async () => {
   try {
-    pokemons = await query("select * from pokedetails limit 5");
+    pokemons = await query("select * from pokedetails limit 10");
     // console.log(pokemons);
   } catch (err) {
     if (err) console.log(err);
