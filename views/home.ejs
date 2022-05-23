@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home Page</title>
+    <style type="text/css" media="screen">
+      body {
+        background-color: skyblue;
+        text-decoration-color: white;
+        font-size: 5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <ul>
+      <% pokemons.forEach((pokemon)=>{%>
+      <li><%=pokemon.name%></li>
+      <%});%>
+    </ul>
+  </body>
+</html>
