@@ -1,21 +1,83 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Home Page</title>
+    <title>PokeDex</title>
     <style type="text/css" media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+      }
       body {
         background-color: skyblue;
         text-decoration-color: white;
-        font-size: 5em;
+        /* font-size: 5em; */
+        overflow: hidden;
+      }
+      .title {
+        text-align: center;
+        font-size: 3rem;
+      }
+      .pokedex-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .pokedex-items {
+        font-size: 1.6rem;
+        list-style: none;
       }
     </style>
   </head>
 
   <body>
-    <ul>
-      <% pokemons.forEach((pokemon)=>{%>
-      <li><%=pokemon.name%></li>
-      <%});%>
-    </ul>
+    <h1 class="title">PokeDex</h1>
+    <section class="query-container">
+      <form action="" method="post" class="query-form">
+        <fieldset>
+          <legend>Choose your sorting technique features:</legend>
+          <div>
+            <input
+              type="checkbox"
+              id="attack"
+              name="attack"
+              checked
+              value="attack"
+            />
+            <label for="attack">Attack</label>
+          </div>
+
+          <div>
+            <input
+              type="checkbox"
+              id="defense"
+              name="defense"
+              value="defense"
+            />
+            <label for="defense">Defense</label>
+          </div>
+        </fieldset>
+        <button type="submit" class="submit-btn">Sort</button>
+      </form>
+    </section>
+    <section class="pokedex-container">
+      <ul class="pokedex-items">
+        <% pokemons.forEach((pokemon)=>{%>
+        <li class="pokedex-item">
+          <%=pokemon.pokedex_number%> <%=pokemon.name%>
+        </li>
+        <%});%>
+      </ul>
+    </section>
   </body>
 </html>
+
+<script>
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+
+  const form = document.querySelector("query-form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
+</script>

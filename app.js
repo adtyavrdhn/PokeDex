@@ -1,4 +1,5 @@
 const express = require("express");
+const parser = require("body-parser");
 const util = require("util");
 const path = require("path");
 var mysql = require("mysql");
@@ -26,17 +27,42 @@ connection.connect((err) => {
 // query promisified for async/await usage
 const query = util.promisify(connection.query).bind(connection);
 
-(async () => {
+// async function execquery(sql) {
+//   try {
+//     pokemons = await query(sql);
+//     // console.log(pokemons);
+//   } catch (err) {
+//     if (err) console.log(err);
+//   }
+// }
+// execquery("SELECT * from pokedetails limit 5");
+// app.get("/", (req, res) => {
+//   res.render("home", { pokemons: pokemons });
+// });
+
+async function execquery(sql) {
   try {
-    pokemons = await query("select * from pokedetails limit 10");
+    pokemons = await query(sql);
     // console.log(pokemons);
   } catch (err) {
     if (err) console.log(err);
   }
-})();
+}
+async function renderQuery() {
+  await execquery("SELECT * from pokedetails limit 10;");
+  app.get("/", (req, res) => {
+    res.render("home", { pokemons: pokemons || [] });
+  });
+}
+renderQuery();
 
-app.get("/", (req, res) => {
-  res.render("home", { pokemons: pokemons });
+app.post("/", parser, (req, res) => {
+  console.log(req.body);
+  //   res.render("home", { pokemons: pokemons });
 });
+
+// async function renderQuery2() {
+//   await execquery("SELECT * from pokedetails limit 10;");
+// }
 
 connection.end();
