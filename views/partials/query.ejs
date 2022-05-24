@@ -1,6 +1,57 @@
+<style type="text/css" media="screen">
+  .poke-name-text {
+    border: none;
+  }
+  .button {
+    width: 9rem;
+    height: 2.8rem;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .button:hover {
+    background-color: #2ee59d;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  .field {
+    border: none;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .name-input {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .poke-name-text {
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0.6rem;
+    border-radius: 0.2rem;
+  }
+  .poke-name-label {
+    font-size: 1.1rem;
+  }
+</style>
 <form action="/search" class="query-form" method="post">
-  <fieldset>
-    <div class="pokemon-name-container">
+  <fieldset class="field">
+    <div class="name-input">
       <label for="poke-name-text" class="poke-name-label">Pokemon</label>
       <input
         type="text"
@@ -9,6 +60,6 @@
         class="poke-name-text"
       />
     </div>
-    <button type="submit" value="OK">Submit</button>
+    <button type="submit" value="OK" class="button">Submit</button>
   </fieldset>
 </form>

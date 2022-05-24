@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokedex</title>
+    <link href="http://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet" />
+    <style type="text/css" media="screen">
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        overflow: scroll;
+        overflow-x: hidden;
+      }
+      ::-webkit-scrollbar {
+        width: 0;
+        background: transparent;
+      }
+      body {
+        background-color: #08d9d6;
+        text-decoration: none;
+        overflow: hidden;
+      }
+      .title {
+        text-align: center;
+        font-size: 4rem;
+        font-family: "Pokemon Solid", sans-serif;
+      }
+      ul {
+        list-style: none;
+      }
+      .header {
+        margin-bottom: 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include ('partials/header.ejs')%> <%- include ('partials/query.ejs')%>
+    <%- include ('partials/pokedex.ejs')%> <%- include ('partials/footer.ejs')%>
+  </body>
+</html>
+
+<script>
+  if (window.history.replaceState) {
+    window.history.replaceState(null, null, window.location.href);
+  }
+</script>
