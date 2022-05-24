@@ -1,17 +1,25 @@
 const express = require("express");
-const parser = require("body-parser");
+const helmet = require("helmet");
+const bodyParser = require("body-parser");
 const util = require("util");
 const path = require("path");
-var mysql = require("mysql");
-let pokemons;
-const app = express();
+const mysql = require("mysql");
+const { body, validationResult } = require("express-validator");
 
+//////////////////////////////////////////////////////////////////////////////////////
+let pokemons;
+let pabilities;
+//////////////////////////////////////////////////////////////////////////////////////
+const app = express();
 app.set("view engine", "ejs");
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+// app.use(helmet());
 app.listen("3000", () => {
   //   console.log("Server Started");
 });
-
+////////////////////////////////////////////////////////////////////////////////////////
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -26,43 +34,36 @@ connection.connect((err) => {
 
 // query promisified for async/await usage
 const query = util.promisify(connection.query).bind(connection);
-
-// async function execquery(sql) {
-//   try {
-//     pokemons = await query(sql);
-//     // console.log(pokemons);
-//   } catch (err) {
-//     if (err) console.log(err);
-//   }
-// }
-// execquery("SELECT * from pokedetails limit 5");
-// app.get("/", (req, res) => {
-//   res.render("home", { pokemons: pokemons });
-// });
-
+///////////////////////////////////////////////////////////////////////////////////////////////
 async function execquery(sql) {
   try {
-    pokemons = await query(sql);
+    if (sql.includes("pokedetails")) pokemons = await query(sql);
+    if (sql.includes("pokeabilities")) pabilities = await query(sql);
     // console.log(pokemons);
   } catch (err) {
     if (err) console.log(err);
   }
 }
-async function renderQuery() {
-  await execquery("SELECT * from pokedetails limit 10;");
-  app.get("/", (req, res) => {
-    res.render("home", { pokemons: pokemons || [] });
+async function renderQuery(sql, url) {
+  await execquery(sql);
+  app.get(`${url}`, (req, res) => {
+    res.render("home", {
+      pokemons: pokemons || [],
+      pabilities: pabilities || [],
+    });
   });
 }
-renderQuery();
+renderQuery("SELECT * from pokedetails limit 10", "/");
+renderQuery("SELECT * from pokeabilities limit 10", "/");
 
-app.post("/", parser, (req, res) => {
-  console.log(req.body);
-  //   res.render("home", { pokemons: pokemons });
+app.post("/search", function (req, res) {
+  let name = req.body.name;
+  let sql = `select * from pokedetails where name like '%${name}%'`;
+  renderQuery(sql, "/search");
 });
 
-// async function renderQuery2() {
-//   await execquery("SELECT * from pokedetails limit 10;");
-// }
-
+// app.post("/", bodyParser, (req, res) => {
+//   console.log(req.body);
+//     res.render("home", { pokemons: pokemons });
+// });
 connection.end();

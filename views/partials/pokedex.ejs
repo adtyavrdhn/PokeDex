@@ -1,0 +1,28 @@
+<section class="pokedex-container">
+  <section class="cards-container">
+    <ul class="pokedex-cards cards">
+      <% for(let i=0;i<pokemons.length;i++){%>
+      <li class="pokedex-item">
+        <div class="card">
+        <span class="poke-name"><%=pokemons[i].name%></span>
+        <span class="hp">HP: <%=pokemons[i].hp%></span>
+        <span class="type"> Type: <%=pokemons[i].type%></span>
+        <span class="attack">Attack: <%=pabilities[i].attack%> </span>
+        <span class="defense">Defense: <%=pabilities[i].defense%></span>
+        <span class="legendary">Legendary: <%=pokemons[i].is_legendary == 0 ? 'No' : 'Yes'%></span>
+        </div>
+      </li>
+      <%}%>
+    </ul>
+  </section>
+</section>
+
+<!-- <% pokemons.forEach((pokemon)=>{%>
+      <li class="pokedex-item card">
+        <span>Name:<%=pokemon.name%></span>
+        <span class="hp">HP: <%=pokemon.hp%></span>
+        <span class="type"> Type: <%=pokemon.type%></span>
+        <span class="attack">Attack:</span>
+        <span class="defense">Defense:</span>
+      </li>
+      <%});%> -->
