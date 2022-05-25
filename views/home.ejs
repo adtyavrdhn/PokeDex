@@ -3,6 +3,12 @@
   <head>
     <title>PokeDex</title>
     <link href="http://fonts.cdnfonts.com/css/pokemon-solid" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <style type="text/css" media="screen">
       * {
         margin: 0;
@@ -21,6 +27,7 @@
         background-color: #f5e3c1;
         text-decoration: none;
         overflow: hidden;
+        font-family: "Poppins", sans-serif;
       }
       .title {
         text-align: center;
@@ -43,8 +50,8 @@
 </html>
 
 <script>
-  // const form = document.querySelector("query-form");
-  // form.addEventListener("submit", (e) => {
-  //   e.preventDefault();
-  // });
+  const form = document.querySelector("query-form");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+  });
 </script>

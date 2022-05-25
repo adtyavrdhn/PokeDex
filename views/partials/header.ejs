@@ -25,8 +25,8 @@
     border-radius: 50%;
     overflow: hidden;
     box-shadow: inset -10px 10px 0 10px #ccc;
-    animation: fall 0.25s ease-in-out,
-      shake 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
+    animation: fall 0.9s ease-in-out,
+      shake 3.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) 3;
   }
   .pokeball::before,
   .pokeball::after {
@@ -67,20 +67,20 @@
     }
   }
   @keyframes shake {
-    0 {
+    0% {
       transform: translate(0, 0) rotate(0);
     }
     20% {
-      transform: translate(-10px, 0) rotate(-20deg);
+      transform: translate(-10px, 0) rotate(-18deg);
     }
     30% {
-      transform: translate(10px, 0) rotate(20deg);
+      transform: translate(10px, 0) rotate(18deg);
     }
     50% {
-      transform: translate(-10px, 0) rotate(-10deg);
+      transform: translate(-10px, 0) rotate(-18deg);
     }
     60% {
-      transform: translate(10px, 0) rotate(10deg);
+      transform: translate(10px, 0) rotate(18deg);
     }
     100% {
       transform: translate(0, 0) rotate(0);
