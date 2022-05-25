@@ -40,14 +40,19 @@ async function execquery(sql) {
 
 app.post("/search", async function (req, res) {
   let name = req.body.pokename;
+  // console.log(req.body);
   await renderQuery(req.body);
   res.render("post", { data: data });
 });
 
 async function renderQuery(query) {
   let name = query.pokename;
-  let sql = `SELECT * from pokedetails as pd join pokeabilities using(pokedex_number) where pd.name like '%${name}%'`;
-  await execquery(sql);
+  let legendary = query.legendary == "on" ? true : false;
+  let base = `SELECT * from pokedetails as pd join pokeabilities using(pokedex_number) where pd.name like '%${name}%'`;
+
+  if (legendary) base += "AND is_legendary = 1";
+
+  await execquery(base);
 }
 app.get("/search", async function (req, res) {
   await execquery("SELECT * from pokedetails,pokeabilities limit 10;");
