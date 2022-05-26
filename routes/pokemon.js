@@ -1,17 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const mysql = require("mysql");
-const util = require("util");
+const query = require("../model/database.js").query;
+//////////////////////////////////////////////////////////////////////////////////////
 let data = [];
-
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "7781",
-  database: "pokedex",
-});
-
-const query = util.promisify(connection.query).bind(connection);
+///////////////////////////////////////////////////////////////////////////////////////
 async function execquery(sql) {
   try {
     data = await query(sql);
@@ -30,6 +22,8 @@ async function renderQuery(query) {
   await execquery(base);
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 router.post("/search", async function (req, res) {
   let name = req.body.pokename;
   await renderQuery(req.body);
@@ -39,5 +33,7 @@ router.post("/search", async function (req, res) {
 router.use("/", async function (req, res) {
   res.render("home");
 });
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 module.exports = router;
