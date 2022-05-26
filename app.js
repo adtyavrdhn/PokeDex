@@ -1,26 +1,23 @@
 const express = require("express");
-const helmet = require("helmet");
 const bodyParser = require("body-parser");
 const util = require("util");
-const path = require("path");
 const mysql = require("mysql");
 const { body, validationResult } = require("express-validator");
-const res = require("express/lib/response");
-
-//////////////////////////////////////////////////////////////////////////////////////
-let data = [];
-//////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////
+const pokeroutes = require("./routes/pokemon.js");
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// let data = [];
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const app = express();
 app.set("view engine", "ejs");
-
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(helmet());
+let router = express.Router();
 app.listen("3000", () => {
   //   console.log("Server Started");
 });
-////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -28,40 +25,8 @@ const connection = mysql.createConnection({
   database: "pokedex",
 });
 // query promisified for async/await usage
-const query = util.promisify(connection.query).bind(connection);
-///////////////////////////////////////////////////////////////////////////////////////////////
-async function execquery(sql) {
-  try {
-    data = await query(sql);
-  } catch (err) {
-    if (err) console.log(err);
-  }
-}
+// const query = util.promisify(connection.query).bind(connection);
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-app.post("/search", async function (req, res) {
-  let name = req.body.pokename;
-  // console.log(req.body);
-  await renderQuery(req.body);
-  res.render("post", { data: data });
-});
-
-async function renderQuery(query) {
-  let name = query.pokename;
-  let legendary = query.legendary == "on" ? true : false;
-  let base = `SELECT * from pokedetails as pd join pokeabilities using(pokedex_number) where pd.name like '%${name}%'`;
-
-  if (legendary) base += "AND is_legendary = 1";
-
-  await execquery(base);
-}
-app.get("/search", async function (req, res) {
-  await execquery("SELECT * from pokedetails,pokeabilities limit 10;");
-  res.render("home", { data: data });
-});
-
-app.get("/", async function (req, res) {
-  await execquery("SELECT * from pokedetails,pokeabilities limit 10;");
-  res.render("home", { data: data });
-});
-
-//
+app.use(pokeroutes);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
