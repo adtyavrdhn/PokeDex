@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { query } = require("../model/database.js");
-//////////////////////////////////////////////////////////////////////////////////////
-let data = [];
+let { data, tdata, query } = require("../model/database.js");
 ///////////////////////////////////////////////////////////////////////////////////////
 async function execquery(sql) {
   try {
@@ -25,13 +23,11 @@ async function renderQuery(query) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 router.post("/search", async function (req, res) {
-  let name = req.body.pokename;
+  res.locals.url = req.originalUrl;
+  res.locals.host = req.get("host");
+  res.locals.protocol = req.protocol;
   await renderQuery(req.body);
-  res.render("post", { data: data });
-});
-
-router.use("/", async function (req, res) {
-  res.render("home");
+  res.render("post", { data: data, tdata: tdata });
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////

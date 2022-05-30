@@ -44,7 +44,12 @@
   </head>
 
   <body>
-    <%- include ('partials/header.ejs')%> <%- include ('partials/query.ejs')%>
+    <%- include ('partials/header.ejs')%> 
+    <% if(url=="/trainer"){ %>
+    <%-include('partials/trainerquery.ejs')%> 
+    <% } else{ %>  
+    <%- include ('partials/query.ejs')%>
+    <% } %>
     <%- include ('partials/footer.ejs')%>
   </body>
 </html>

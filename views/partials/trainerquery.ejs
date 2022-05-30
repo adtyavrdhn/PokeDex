@@ -1,0 +1,62 @@
+<style type="text/css" media="screen">
+  .trainer-name-text {
+    border: none;
+  }
+  .button {
+    width: 8rem;
+    height: 2.4rem;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #fff;
+    border: none;
+    border-radius: 45px;
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .button:hover {
+    background-color: #e56049;
+    color: #fff;
+    transform: translateY(-5px);
+  }
+  .field {
+    border: none;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .name-input {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .trainer-name-text {
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0.6rem;
+    border-radius: 0.8rem;
+  }
+  .trainer-name-label {
+    font-size: 1.1rem;
+  }
+</style>
+<form action="/trainer/search" class="query-form" method="post">
+  <fieldset class="field">
+    <div class="name-input">
+      <label for="trainer-name-text" class="trainer-name-label">Trainer</label>
+      <input
+        type="text"
+        name="trainername"
+        id="trainer-name-text"
+        class="trainer-name-text"
+      />
+    </div>
+    <button type="submit" value="OK" class="button">Submit</button>
+  </fieldset>
+</form>

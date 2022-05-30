@@ -1,6 +1,9 @@
 const mysql = require("mysql");
 const util = require("util");
 
+let tdata = [];
+let data = [];
+
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -9,5 +12,6 @@ const connection = mysql.createConnection({
 });
 
 const query = util.promisify(connection.query).bind(connection);
-
-module.exports = { query: query };
+exports.query = query;
+exports.tdata = tdata;
+exports.data = data;

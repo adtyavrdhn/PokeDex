@@ -100,6 +100,16 @@
       top: 0;
     }
   }
+  .links-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  a {
+    text-decoration: none;
+    color: #7c382c;
+  }
 </style>
 <header class="header">
   <div class="center-on-page">
@@ -107,5 +117,11 @@
       <div class="pokeball__button"></div>
     </div>
   </div>
-  <h1 class="title">PokeDex</h1>
+  <div class="title-container">
+    <h1 class="title">PokeDex</h1>
+    <div class="links-container">
+      <a href="http://localhost:3000/trainer">Trainers</a>
+      <a href="http://localhost:3000/pokemon">Pokemon</a>
+    </div>
+  </div>
 </header>
