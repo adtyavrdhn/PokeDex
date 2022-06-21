@@ -46,7 +46,13 @@
     </style>
   </head>
   <body>
-    <%- include ('partials/header.ejs')%> <% if(url=="/trainer/search"){ %>
+    <%- include ('partials/header.ejs')%> 
+    <% if(url=="/trainer/search"){ %>
+    <%-include('partials/trainerquery.ejs')%> 
+    <% } else{ %>  
+    <%- include ('partials/query.ejs')%>
+    <% } %>
+    <% if(url=="/trainer/search"){ %>
     <%-include('partials/trainerdex.ejs')%> 
     <% } else{ %>  
     <%- include ('partials/pokedex.ejs')%>
