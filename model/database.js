@@ -5,9 +5,9 @@ let tdata = [];
 let data = [];
 
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "7781",
+  host: "****",
+  user: "****",
+  password: "****",
   database: "pokedex",
 });
 
